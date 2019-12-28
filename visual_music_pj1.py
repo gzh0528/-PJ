@@ -13,15 +13,18 @@ black = (0,0,0)
 white = (255,255,255)
 red = (255,0,0)
 green = (0,255,0)
+seashell=(255,245,238)
+tomato=(255,99,71)
+gold=(255,215,0)
 
 #画跳动小人
 def draw_man(screen,x,y):
-    pygame.draw.ellipse(screen,green,[x,y-5,10,10])
+    pygame.draw.ellipse(screen,seashell,[x,y-5,10,10])
     pygame.draw.line(screen,red,[5+x,5+y],[5+x,15+y],2)
     pygame.draw.line(screen,red,[5+x,5+y],[x-5,15+y],2)
     pygame.draw.line(screen,red,[5+x,5+y],[15+x,15+y],2)
-    pygame.draw.line(screen,green,[5+x,15+y],[x-5,25+y],2)
-    pygame.draw.line(screen,green,[5+x,15+y],[15+x,25+y],2)
+    pygame.draw.line(screen,gold,[5+x,15+y],[x-5,25+y],2)
+    pygame.draw.line(screen,gold,[5+x,15+y],[15+x,25+y],2)
 
 '''
 Visual函数说明
@@ -41,30 +44,32 @@ def visual_music(wave_file,count_freq):
 
     data = wf.readframes(CHUNK)
     pygame.init()#pygame初始化
-    pygame.display.set_caption('可视化频域')
+    pygame.display.set_caption('可视化音乐频域')
     screen = pygame.display.set_mode((850, 400), 0, 32)#窗口大小为(850,400)
     while data != '':
         stream.write(data)
-        data = wf.readframes(CHUNK)#更新data
+        data = wf.readframes(CHUNK)
         #傅里叶变换对频域进行操作
-        numpydata = np.fromstring(data, dtype=np.int16)
-        transforamed=np.real(np.fft.fft(numpydata))
+        np_data = np.fromstring(data, dtype=np.int16)
+        transforamed=np.real(np.fft.fft(np_data))
         screen.fill((0, 0, 0))
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
                 pygame.quit()
-        screen.fill((255, 255, 255))
-        #采样数据点 绘制矩形
+        screen.fill((255, 99, 71))
+        points_list=[]
         for n in range(0,transforamed.size,count_freq):
             hight=abs(int(transforamed[n]/10000))
-            pygame.draw.rect(screen,(0,0,0), ((20*n/count_freq,400),(20,-hight)))
+            pygame.draw.rect(screen,(255,0,255), ((20*n/count_freq,400),(20,-hight)))
             if hight>0:
                 draw_man(screen,20*n/count_freq,370-hight)
+            points_list.append((20*n/count_freq,330-hight))
+        pygame.draw.lines(screen,(255,192,203),False,points_list,8)
         pygame.display.update()
     stream.stop_stream()
     stream.close()
     player.terminate()
 
 if __name__ == '__main__':
-    wf = wave.open("dave.wav", 'rb')  # 以只读的方式打开"1qom8-vi8uq.wav"文件
+    wf = wave.open("dave.wav", 'rb')  # 以只读的方式打开".wav"文件
     visual_music(wf,count_freq=50)
