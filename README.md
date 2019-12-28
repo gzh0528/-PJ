@@ -1,5 +1,5 @@
 # 图形学PJ
-  PJ1: visual_music_pj1.py 是音乐可视化程序 需要导入WAV格式的音乐文件到相对目录即可运行 需要安装 pyaudio pygame wave numpy等库，运行时需要导入.wav文件到代码目录,可直接运行，得到可视化的音乐频域，运行结果如下图。
+  PJ1: visual_music_pj1.py 是音乐可视化程序 需要导入WAV格式的音乐文件到相对目录即可运行 需要安装 pyaudio pygame wave numpy等库，运行时需要导入.wav文件(如dave.wav)到代码目录,可直接运行，得到可视化的音乐频域，运行结果如下图。
   ![Image text]
   (https://github.com/gzh0528/img_folder/blob/master/PJ1_RES.png)
 
