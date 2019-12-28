@@ -4,7 +4,7 @@
   (https://github.com/gzh0528/img_folder/blob/master/PJ1_RES.png)
 
 PJ2: PJ2是真实感图形学编程 采用OpenGL库 C++语言实现了一个色彩丰富的场景,需要配置和OPENGL glut库,即可运行。
-具体实现了一个室内场景，有一个小猪，桌子上摆放着茶壶，地面上的皮球等。按住键盘的上下左右方向键即可操控视角移动。具体运行结果如下图。
+具体实现了一个室内场景，有一个小猪，桌子上摆放着茶壶，地面上的皮球等。按住键盘的上下左右方向键即可操控视角移动。同时添加了环境光照，并对物体的材质进行了设计，使得场景中的景物更加真实。具体运行结果如下图。
 ![Image text]
 (https://github.com/gzh0528/img_folder/blob/master/PJ2_RES.png)
 
