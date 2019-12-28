@@ -65,7 +65,7 @@ public:
 	//更新和绘制方法
 	void update() {
 		//正反运动
-		y += direction * 0.05;
+		/*y += direction * 0.05;
 		if (y > maximumHeight) {
 			y = maximumHeight;
 			direction = -1;
@@ -73,7 +73,7 @@ public:
 		else if (y < radius) {
 			y = radius;
 			direction = 1;
-		}
+		}*/
 		glPushMatrix();
 		//单独设置每个球的材质参数
 		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
@@ -104,7 +104,7 @@ public:
 	//更新和绘制方法
 	void update() {
 		//上下正反运动
-		y += direction * 0.05;
+		/*y += direction * 0.05;
 		if (y > maximumHeight) {
 			y = maximumHeight;
 			direction = -1;
@@ -112,7 +112,7 @@ public:
 		else if (y < dsize) {
 			y = dsize;
 			direction = 1;
-		}
+		}*/
 		glPushMatrix();
 		//单独设置每个立方体的材质参数
 		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
@@ -367,13 +367,13 @@ Checkerboard checkerboard(15, 15);
 Pig pig(ax, ay, az, mx, my, mz, theta);
 Camera camera;
 Ball balls[] = {
-	Ball(1, GREEN, 7, 6, 1),
-	Ball(0.5, MAGENTA, 6, 3, 4),
-	Ball(0.4, RED, 5, 1, 7)
+	Ball(1, GREEN, 1, 6, 1),
+	Ball(0.5, MAGENTA, 1, 3, 4),
+	Ball(0.4, RED, 1, 1, 7)
 };
 
 Cube cubes[] = {
-	Cube(0.7,MAGENTA,4,5,3)
+	Cube(0.7,MAGENTA,1,5,3)
 };
 
 
