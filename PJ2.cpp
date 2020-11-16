@@ -4,39 +4,41 @@
 #include <GL/glut.h>
 #include <math.h>
 
-/*¶¨ÒåÑÕÉ«È«¾Ö±äÁ¿*/
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«È«ï¿½Ö±ï¿½ï¿½ï¿½*/
 
-GLfloat WHITE[] = { 1, 1, 1 };    
+GLfloat WHITE[] = { 1, 1, 1 };
+//haip
+int a=4;
 GLfloat RED[] = { 1, 0, 0 };    
 GLfloat GREEN[] = { 0, 1, 0 };    
 GLfloat MAGENTA[] = { 1, 0, 1 };  
 
-/*¶¨Òå¸¨ÖúÈ«¾Ö±äÁ¿*/
+/*ï¿½ï¿½ï¿½å¸¨ï¿½ï¿½È«ï¿½Ö±ï¿½ï¿½ï¿½*/
 GLint view = 0;
 GLint flag;
 GLuint drawcube, drawsphere, drawteapot;
-const GLfloat Pi = 3.1415926536f; //Ô²ÖÜÂÊ
+const GLfloat Pi = 3.1415926536f; //Ô²ï¿½ï¿½ï¿½ï¿½
 const int n = 1000;
 
 
 /*
-Camera Àà£º ÊµÏÖÕæÊµ³¡¾°µÄÊÓ½Ç×ª»» Ë®Æ½ÒÆ¶¯°ë¾¶Îª10£¬°´ÉÏÏÂ¼ü´¹Ö±ÒÆ¶¯
-Ball Àà£º¶¨ÒåÇòÐÍÔª¼þÀà Éè¼Æ¿ÉÔÚYÖá·½ÏòÉÏÏÂÌø¶¯
-Cube Àà£º¶¨ÒåÁ¢·½ÌåÔª¼þÀà
-Checkerboard£º¶¨ÒåÆåÅÌÔª¼þÀà X,ZÆ½Ãæ·Ö²¼ ²¢ÔÚÉÏ·½ÉèÖÃµã¹âÔ´(4,3,7)
-Pig Àà£º»æÖÆÒ»¸öÐ¡ÖíÊµÌå
+Camera ï¿½à£º Êµï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½ï¿½×ªï¿½ï¿½ Ë®Æ½ï¿½Æ¶ï¿½ï¿½ë¾¶Îª10ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ö±ï¿½Æ¶ï¿½
+Ball ï¿½à£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¿ï¿½ï¿½ï¿½Yï¿½á·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+Cube ï¿½à£ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½
+Checkerboardï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ X,ZÆ½ï¿½ï¿½Ö²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½Ô´(4,3,7)
+Pig ï¿½à£ºï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ð¡ï¿½ï¿½Êµï¿½ï¿½
 */
 class Camera {
-	/*ÀûÓÃÍ¼ÐÎÑ§ÔöÁ¿·¨¸ü¸Ä×ø±ê*/
+	/*ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½Ñ§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 public:
-	double theta;      //È·¶¨xºÍzµÄÎ»ÖÃ
-	double y;          //yÎ»ÖÃ
-	double dTheta;     //½Ç¶ÈÔöÁ¿
-	double dy;         //ÉÏÏÂyÔöÁ¿
+	double theta;      //È·ï¿½ï¿½xï¿½ï¿½zï¿½ï¿½Î»ï¿½ï¿½
+	double y;          //yÎ»ï¿½ï¿½
+	double dTheta;     //ï¿½Ç¶ï¿½ï¿½ï¿½ï¿½ï¿½
+	double dy;         //ï¿½ï¿½ï¿½ï¿½yï¿½ï¿½ï¿½ï¿½
 public:
-	//Àà¹¹Ôìº¯Êý¡ªÄ¬ÈÏ³õÊ¼»¯ÓÃ·¨
+	//ï¿½à¹¹ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½Ä¬ï¿½Ï³ï¿½Ê¼ï¿½ï¿½ï¿½Ã·ï¿½
 	Camera() : theta(0), y(3), dTheta(0.04), dy(0.2) {}
-	//Àà·½·¨
+	//ï¿½à·½ï¿½ï¿½
 	double X_data() { return 10 * cos(theta); }
 	double Y_data() { return y; }
 	double Z_data() { return 10 * sin(theta); }
@@ -47,24 +49,24 @@ public:
 };
 
 class Ball {
-	//ÀàµÄÊôÐÔ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	double radius;
 	GLfloat* color;
 	double maximumHeight;
 	double x;
 	double y;
 	double z;
-	int direction;   //·½Ïò
+	int direction;   //ï¿½ï¿½ï¿½ï¿½
 public:
-	//¹¹Ôìº¯Êý
+	//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
 	Ball(double r, GLfloat* c, double h, double x, double z) :
 		radius(r), color(c), maximumHeight(h), direction(-1),
 		y(h), x(x), z(z) {
 	}
 
-	//¸üÐÂºÍ»æÖÆ·½·¨
+	//ï¿½ï¿½ï¿½ÂºÍ»ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
 	void update() {
-		//Õý·´ÔË¶¯
+		//ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
 		/*y += direction * 0.05;
 		if (y > maximumHeight) {
 			y = maximumHeight;
@@ -75,10 +77,10 @@ public:
 			direction = 1;
 		}*/
 		glPushMatrix();
-		//µ¥¶ÀÉèÖÃÃ¿¸öÇòµÄ²ÄÖÊ²ÎÊý
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½Ê²ï¿½ï¿½ï¿½
 		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 		glTranslated(x, y, z);
-		//´´½¨Çò
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		glutSolidSphere(radius, 30, 30);
 		glPopMatrix();
 	}
@@ -86,24 +88,24 @@ public:
 
 class Cube
 {
-	//ÀàµÄÊôÐÔ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	double dsize;
 	GLfloat* color;
 	double maximumHeight;
 	double x;
 	double y;
 	double z;
-	int direction;   //·½Ïò
+	int direction;   //ï¿½ï¿½ï¿½ï¿½
 public:
-	//¹¹Ôìº¯Êý
+	//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
 	Cube(double d, GLfloat* c, double h, double x, double z) :
 		dsize(d),color(c), maximumHeight(h), direction(-1),
 		y(h), x(x), z(z) {
 	}
 
-	//¸üÐÂºÍ»æÖÆ·½·¨
+	//ï¿½ï¿½ï¿½ÂºÍ»ï¿½ï¿½Æ·ï¿½ï¿½ï¿½
 	void update() {
-		//ÉÏÏÂÕý·´ÔË¶¯
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¶ï¿½
 		/*y += direction * 0.05;
 		if (y > maximumHeight) {
 			y = maximumHeight;
@@ -114,10 +116,10 @@ public:
 			direction = 1;
 		}*/
 		glPushMatrix();
-		//µ¥¶ÀÉèÖÃÃ¿¸öÁ¢·½ÌåµÄ²ÄÖÊ²ÎÊý
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä²ï¿½ï¿½Ê²ï¿½ï¿½ï¿½
 		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, color);
 		glTranslated(x, y, z);
-		//´´½¨Á¢·½Ìå
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		glutSolidCube(dsize);
 		glPopMatrix();
 	}
@@ -128,7 +130,7 @@ class Checkerboard {
 	int width;
 	int depth;
 public:
-	//¹¹Ôìº¯Êý
+	//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
 	Checkerboard(int width, int depth) : width(width), depth(depth) {}
 	void create_board() {
 		displayListId = glGenLists(1);     
@@ -137,12 +139,12 @@ public:
 		glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 		glBegin(GL_QUADS);
 		glNormal3d(0, 1, 0);
-		//±£³Öx£¬zÆ½Ãæ½øÐÐÕ¹¿ª
+		//ï¿½ï¿½ï¿½ï¿½xï¿½ï¿½zÆ½ï¿½ï¿½ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½
 		for (int x = 0; x < width - 1; x++) 
 		{
 			for (int z = 0; z < depth - 1; z++) 
 			{
-			//Ã¿¸ö¸ñ×ÓÉèÖÃ²ÄÁÏÊôÐÔ 
+			//Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 				glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE,
 					(x + z) % 2 == 0 ? RED : MAGENTA);
 				glVertex3d(x + 1, 0, z + 1);
@@ -156,7 +158,7 @@ public:
 		glEnd();
 		glEndList();
 	}
-	//Á½¸ö×ø±êÖÐÐÄ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	double centerx() { return width / 2; }
 	double centerz() { return depth / 2; }
 	void draw() {
@@ -173,12 +175,12 @@ class Pig {
 	GLfloat mz;
 	GLfloat* theta;// [3] = { 0.0, -90.0, 0.0 };
 public:
-	//¹¹Ôìº¯Êý
+	//ï¿½ï¿½ï¿½ìº¯ï¿½ï¿½
 	//Checkerboard(int width, int depth) : width(width), depth(depth) {}
 	Pig(double axis_x,double axis_y,double axis_z,double size_x,double size_y,double size_z,GLfloat* theta)
 		:ax(axis_x),ay(axis_y),az(axis_z),mx(size_x),my(size_y),mz(size_z),theta(theta){}
-	//ÖÐÐÄX
-	void draw1() //»­µÚÒ»Ö»Öí
+	//ï¿½ï¿½ï¿½ï¿½X
+	void draw1() //ï¿½ï¿½ï¿½ï¿½Ò»Ö»ï¿½ï¿½
 	{
 
 		glTranslatef(ax, ay, az);
@@ -279,7 +281,7 @@ public:
 		glEnable(GL_COLOR_MATERIAL);
 		glPopMatrix();
 
-		//ÇòÐÍÉíÌå
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		glPushMatrix();
 		glEnable(GL_COLOR_MATERIAL);
 		glColor3f(10, 0.8, 0.8);
@@ -352,7 +354,7 @@ public:
 };
 
 
-/*ÖíµÄ³õÊ¼×ø±ê+Ëõ·Å±¶Êý*/
+/*ï¿½ï¿½Ä³ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½+ï¿½ï¿½ï¿½Å±ï¿½ï¿½ï¿½*/
 GLfloat ax = 7.0f;
 GLfloat ay = 0.5f;
 GLfloat az = 11.0f;
@@ -361,7 +363,7 @@ GLfloat my = 3.0f;
 GLfloat mz = 3.0f;
 GLfloat theta[3] = { 0.0, -90.0, 0.0 };
 /*
-È«¾Ö±äÁ¿£ºÆåÅÌ¸ñ¡¢Öí¡¢Ïà»úºÍÇò¡¢Á¢·½ÌåµÄÀàÐÍÊµÀý»¯
+È«ï¿½Ö±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½
 */
 Checkerboard checkerboard(15, 15);
 Pig pig(ax, ay, az, mx, my, mz, theta);
@@ -379,9 +381,9 @@ Cube cubes[] = {
 
 void init() {
 	/*
-	1.Éî¶È²âÊÔ
-	2.Ò»Ì×²»½âÊÍÁ¬ÕÐ ÉèÖÃÉ¢Éä·´Éä¾µÃæ·´ÉäµÄ¹âÕÕ
-	3. ÔÚinitÀïÃæ´´½¨ºÃÆåÅÌ
+	1.ï¿½ï¿½È²ï¿½ï¿½ï¿½
+	2.Ò»ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½É¢ï¿½ä·´ï¿½ä¾µï¿½æ·´ï¿½ï¿½Ä¹ï¿½ï¿½ï¿½
+	3. ï¿½ï¿½initï¿½ï¿½ï¿½æ´´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	*/
 	glEnable(GL_DEPTH_TEST);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, WHITE);
@@ -394,26 +396,26 @@ void init() {
 }
 
 void display() {
-	//Çå³ýÉÏÒ»Ö¡µÄ½á¹û
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ö¡ï¿½Ä½ï¿½ï¿½
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
-	//½«CameraÀàµÄ×ø±ê×÷Îª¹Û²ì×ø±ê
+	//ï¿½ï¿½Cameraï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Û²ï¿½ï¿½ï¿½ï¿½ï¿½
 	gluLookAt(camera.X_data(), camera.Y_data(), camera.Z_data(),    
-		checkerboard.centerx(), 0.0, checkerboard.centerz(),   //½¹µã×ø±ê
-		0.0, 1.0, 0.0);   //ÉãÏñ»ú»ú¶¥·½ÏòÊ¸Á¿
+		checkerboard.centerx(), 0.0, checkerboard.centerz(),   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		0.0, 1.0, 0.0);   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¸ï¿½ï¿½
 	checkerboard.draw();
-	//»­¸öÐ¡Öí
+	//ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
 	glPushMatrix();
 	pig.draw1();
 	glPopMatrix();
-	//»æÖÆÐ¡Çò
+	//ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
 	for (int i = 0; i < sizeof balls / sizeof(Ball); i++) {
-		//¸üÐÂÎ»ÖÃ²¢»æÍ¼
+		//ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã²ï¿½ï¿½ï¿½Í¼
 		balls[i].update();
 	}
-	// »æÖÆ Á¢·½Ìå
+	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	for (int i = 0; i < sizeof cubes / sizeof(Cube); i++) {
-		//¸üÐÂÎ»ÖÃ²¢»æÍ¼
+		//ï¿½ï¿½ï¿½ï¿½Î»ï¿½Ã²ï¿½ï¿½ï¿½Í¼
 		cubes[i].update();
 	}
 
@@ -433,12 +435,12 @@ void display() {
 	glColor3f(0, 0, 1);
 	glRotatef(1, 0, 0, 180);
 	glTranslatef(10, 0.3, 10);
-	//¼Ó¸öÔ²»·
+	//ï¿½Ó¸ï¿½Ô²ï¿½ï¿½
 	glutSolidTorus(0.25, 0.4, 20, 20);
 	//glDisable(GL_COLOR_MATERIAL);
 	glPopMatrix();
 
-	/*ËÄ¸ö×À×ÓÍÈ*/
+	/*ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	glPushMatrix();
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT, GL_AMBIENT);
@@ -478,7 +480,7 @@ void display() {
 	glCallList(drawcube);
 	glDisable(GL_COLOR_MATERIAL);
 	glPopMatrix();
-	/*×ÀÃæ*/
+	/*ï¿½ï¿½ï¿½ï¿½*/
 	glPushMatrix();
 	glEnable(GL_COLOR_MATERIAL);
 	glColorMaterial(GL_FRONT, GL_AMBIENT);
@@ -494,8 +496,8 @@ void display() {
 
 	glDisable(GL_COLOR_MATERIAL);
 	glPopMatrix();
-	//×ÀÃæÉÏ°Ú²èºø
-	glPushMatrix();//²èºø
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ï°Ú²ï¿½ï¿½
+	glPushMatrix();//ï¿½ï¿½ï¿½
 	glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
 	glEnable(GL_COLOR_MATERIAL);
 	glColor3f(1.0, 0.0, 0.0);
@@ -518,7 +520,7 @@ void Key_operation(int key, int, int) {
 	}
 	glutPostRedisplay();
 }
-//´°¿Úµ÷Õû´óÐ¡Ê±µ÷ÓÃµÄº¯Êý
+//ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Ê±ï¿½ï¿½ï¿½ÃµÄºï¿½ï¿½ï¿½
 void reshape(GLint w, GLint h) {
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
@@ -537,7 +539,7 @@ int main(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowPosition(80, 80);
 	glutInitWindowSize(800, 600);
-	glutCreateWindow("PJ2Í¼ÐÎÑ§");
+	glutCreateWindow("PJ2Í¼ï¿½ï¿½Ñ§");
 	glutDisplayFunc(display);   
 	glutReshapeFunc(reshape);   
 	glutSpecialFunc(Key_operation);   
