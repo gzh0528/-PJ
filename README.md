@@ -11,4 +11,4 @@ PJ2: PJ2是真实感图形学编程 采用OpenGL库 C++语言实现了一个色�
 PJ3: FlashPJ3是FLASH动画 实现了一个小车在新奇的城市间穿梭 设置了一些有趣的布局。具体结果如下图。
 ![Image text]
 (https://github.com/gzh0528/img_folder/blob/master/PJ3_RES.png)
-
+Well done!
